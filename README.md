@@ -30,6 +30,11 @@ Order isn't important.
 
 This should be a quick little task, but the client is paying us A Billion dollars for it so make sure your implementation is as robust as it is beautiful.
 
+If you have extra time after you have implemented all the above functionality, some extra credit opportunities include:
+* Unit tests
+* Integration tests
+* Documentation
+
 Don't forget to `git push` regularly.
 
 Have fun!

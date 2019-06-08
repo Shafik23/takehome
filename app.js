@@ -12,35 +12,49 @@ let globalResponse = {twitter: [], facebook: [], instagram: []};
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+function log(...args) {
+    const DEBUG = true;
+    if (DEBUG) {
+        console.log(...args);
+    }
+}
+
 
 app.get('/', function (req, res) {
     request('https://takehome.io/twitter', {json: true}, (err, res, body) => {
-        console.log('Twitter:');
+        log('Twitter:');
         if (err) { 
-            console.log('Error: ', err); 
+            log('Error: ', err); 
         }
-        console.log(body);
+        log(body);
+
+        globalResponse.twitter = body;
     });
 
     request('https://takehome.io/facebook', {json: true}, (err, res, body) => {
-        console.log('Facebook:');
+        log('Facebook:');
         if (err) { 
-            console.log('Error: ', err); 
+            log('Error: ', err); 
         }
-        console.log(body);
+        log(body);
+
+        globalResponse.facebook = body;
     });
 
     request('https://takehome.io/instagram', {json: true}, (err, res, body) => {
-        console.log('Instagram:');
+        log('Instagram:');
         if (err) { 
-            console.log('Error: ', err); 
+            log('Error: ', err); 
         }
-        console.log(body);
+        log(body);
+
+        globalResponse.instagram = body;
     });
 
     res.json(globalResponse);
 });
 
+
 app.listen(3000, function () {
-    console.log('Social Network Aggregator, at your service ...');
+    log('Social Network Aggregator, at your service ...');
 });

@@ -1,0 +1,15 @@
+{
+  "name": "takehome",
+  "version": "1.0.0",
+  "description": "Social Network Aggregator",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://805a7fa1-0113-4b54-8f29-68a401450ca1:cA3mYrX6thrcVAVjpyAAs_-hL@git.takehome.io/805a7fa1-0113-4b54-8f29-68a401450ca1"
+  },
+  "author": "Shafik Amin",
+  "license": "ISC"
+}

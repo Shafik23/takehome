@@ -3,6 +3,7 @@
 const fs = require('fs');
 const express = require('express');
 const request = require('request');
+const requestPromise = require('request-promise');
 const app = express();
 const bodyParser = require('body-parser');
 
@@ -20,38 +21,46 @@ function log(...args) {
 }
 
 
+// Default home route: performs 3 requests asynchronously to the different
+// social-media APIs, then waits for all of them to finish before returning the results.
 app.get('/', function (req, res) {
-    request('https://takehome.io/twitter', {json: true}, (err, res, body) => {
-        log('Twitter:');
-        if (err) { 
+    const r1 = requestPromise('https://takehome.io/twitter')
+        .then(function(body) {
+            log('Twitter:');
+            log(body);
+            globalResponse.twitter = body;
+        })
+        .catch(function(err) {
             log('Error: ', err); 
-        }
-        log(body);
+            globalResponse.twitter = ['Error: ' + err];
+        });
 
-        globalResponse.twitter = body;
-    });
-
-    request('https://takehome.io/facebook', {json: true}, (err, res, body) => {
-        log('Facebook:');
-        if (err) { 
+    const r2 = requestPromise('https://takehome.io/facebook')
+        .then(function(body) {
+            log('Facebook:');
+            log(body);
+            globalResponse.facebook = body;
+        })
+        .catch(function(err) {
             log('Error: ', err); 
-        }
-        log(body);
+            globalResponse.facebook = ['Error: ' + err];
+        });
 
-        globalResponse.facebook = body;
-    });
-
-    request('https://takehome.io/instagram', {json: true}, (err, res, body) => {
-        log('Instagram:');
-        if (err) { 
+    const r3 = requestPromise('https://takehome.io/instagram')
+        .then(function(body) {
+            log('Instagram:');
+            log(body);
+            globalResponse.instagram = body;
+        })
+        .catch(function(err) {
             log('Error: ', err); 
-        }
-        log(body);
+            globalResponse.instagram = ['Error: ' + err];
+        });
 
-        globalResponse.instagram = body;
+
+    Promise.all([r1, r2, r3]).then(function() {
+        res.json(globalResponse);
     });
-
-    res.json(globalResponse);
 });
 
 

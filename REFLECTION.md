@@ -13,7 +13,7 @@ The requirements were pretty straight-forward except for one subtle (but importa
 
 My initial solution returned whatever response was cached from the *previous request*. This had the nice advantage of returning a response immediately, since it just returned data that was already loaded in memory.
 
-However after reading the words "All of them. **Right now**.", I decided that the request would have to be synchronous - it would have to go out and fetch all 3 APIs, then wait for all of them to complete before returning a response.
+However after reading the words "All of them. **Right now**.", I decided that the request would have to be synchronous - i.e. it would have to go out and fetch all 3 APIs, then wait for all of them to complete before returning a response.
 
 This forced me to learn Javascript Promises real quick - something that I have heard of plenty of times, but never really coded myself. It was a tad confusing at first but I got the hang of it. I know that I could've solved it with async/await as well (just syntatic sugar for Promises), but I decided to leave that for another day.
 

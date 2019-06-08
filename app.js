@@ -5,11 +5,9 @@ const express = require('express');
 const request = require('request');
 const requestPromise = require('request-promise');
 const app = express();
-const bodyParser = require('body-parser');
-
 
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: true }));
+
 
 // Set DEBUG=false to quiet output to the console.
 function log(...args) {
@@ -22,7 +20,6 @@ function log(...args) {
 
 let globalResponse = {twitter: [], facebook: [], instagram: []};
 
-
 // Helper function: performs a request to the given social media API,
 // and returns a Promise encapsulating the response.
 function requestSocialMedia(media) {
@@ -33,7 +30,7 @@ function requestSocialMedia(media) {
             globalResponse[media] = body;
         })
         .catch(function(err) {
-            log(`Error ${media}: `, err.message); 
+            log(`Error from ${media}: `, err.message); 
             globalResponse[media] = ['API Error: ' + err];
         });
 }

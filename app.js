@@ -21,7 +21,7 @@ function log(...args) {
 }
 
 
-// Helper function: performs are a request to the given social media API,
+// Helper function: performs a request to the given social media API,
 // and returns a Promise encapsulating the response.
 function requestSocialMedia(media) {
     const p = requestPromise(`https://takehome.io/${media}`, {json: true})

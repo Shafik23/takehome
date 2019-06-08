@@ -18,6 +18,10 @@ However after reading the words "All of them. **Right now**.", I decided that th
 This forced me to learn Javascript Promises real quick - something that I have heard of plenty of times, but never really coded myself. It was a tad confusing at first but I got the hang of it. I know that I could've solved it with async/await as well (just syntatic sugar for Promises), but I decided to leave that for another day.
 
 ## Testing
-For development-testing, I created a very simple testing script: curlHelper.sh - it sits in a loop forever and simply performs a curl request to my server, and outputs pretty-printed JSON as the result. This allowed me to quickly iterate as I developed.
+For development-iteration testing, I created a very simple testing script: curlHelper.sh - it sits in a loop forever and simply performs a curl request to my server, and outputs pretty-printed JSON as the result. This allowed me to quickly iterate as I developed.
 
 curlHelper.sh can also double as a (weak) integration-test suite. It's weak because it does not validate the response automatically - a human is needed to visually verfiy the results.
+
+Since the project was so small, I decided there's no need for unit-tests: all the functions can be tested sufficiently using a proper integration test.
+
+For proper integration testing, I researched online and found the combination of Mocha/Chai to be the best for this use case, and added a simple test file.

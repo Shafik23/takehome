@@ -11,5 +11,9 @@
     "url": "https://805a7fa1-0113-4b54-8f29-68a401450ca1:cA3mYrX6thrcVAVjpyAAs_-hL@git.takehome.io/805a7fa1-0113-4b54-8f29-68a401450ca1"
   },
   "author": "Shafik Amin",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "request": "^2.88.0"
+  }
 }

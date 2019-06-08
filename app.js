@@ -14,7 +14,31 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.get('/', function (req, res) {
-    res.send('Hello World!');
+    request('https://takehome.io/twitter', {json: true}, (err, res, body) => {
+        console.log('Twitter:');
+        if (err) { 
+            console.log('Error: ', err); 
+        }
+        console.log(body);
+    });
+
+    request('https://takehome.io/facebook', {json: true}, (err, res, body) => {
+        console.log('Facebook:');
+        if (err) { 
+            console.log('Error: ', err); 
+        }
+        console.log(body);
+    });
+
+    request('https://takehome.io/instagram', {json: true}, (err, res, body) => {
+        console.log('Instagram:');
+        if (err) { 
+            console.log('Error: ', err); 
+        }
+        console.log(body);
+    });
+
+    res.json(globalResponse);
 });
 
 app.listen(3000, function () {

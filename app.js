@@ -21,44 +21,31 @@ function log(...args) {
 }
 
 
+// Helper function: performs are a request to the given social media API,
+// and returns a Promise encapsulating the response.
+function requestSocialMedia(media) {
+    const p = requestPromise(`https://takehome.io/${media}`, {json: true})
+        .then(function(body) {
+            log(`${media}:`);
+            log(body);
+            globalResponse[media] = body;
+        })
+        .catch(function(err) {
+            log(`Error ${media}: `, err.message); 
+            globalResponse[media] = ['API Error: ' + err];
+        });
+
+    return p;
+}
+
 // Default home route: performs 3 requests asynchronously to the different
 // social-media APIs, then waits for all of them to finish before returning the results.
 app.get('/', function (req, res) {
-    const r1 = requestPromise('https://takehome.io/twitter')
-        .then(function(body) {
-            log('Twitter:');
-            log(body);
-            globalResponse.twitter = body;
-        })
-        .catch(function(err) {
-            log('Error: ', err); 
-            globalResponse.twitter = ['Error: ' + err];
-        });
-
-    const r2 = requestPromise('https://takehome.io/facebook')
-        .then(function(body) {
-            log('Facebook:');
-            log(body);
-            globalResponse.facebook = body;
-        })
-        .catch(function(err) {
-            log('Error: ', err); 
-            globalResponse.facebook = ['Error: ' + err];
-        });
-
-    const r3 = requestPromise('https://takehome.io/instagram')
-        .then(function(body) {
-            log('Instagram:');
-            log(body);
-            globalResponse.instagram = body;
-        })
-        .catch(function(err) {
-            log('Error: ', err); 
-            globalResponse.instagram = ['Error: ' + err];
-        });
-
-
-    Promise.all([r1, r2, r3]).then(function() {
+    Promise.all([
+        requestSocialMedia('twitter'),
+        requestSocialMedia('facebook'),
+        requestSocialMedia('instagram')
+    ]).then(function() {
         res.json(globalResponse);
     });
 });

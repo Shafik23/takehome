@@ -1,8 +1,6 @@
-"use strict";
+'use strict';
 
-const fs = require('fs');
 const express = require('express');
-const request = require('request');
 const requestPromise = require('request-promise');
 const app = express();
 

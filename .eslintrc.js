@@ -2,13 +2,14 @@ module.exports = {
     "env": {
         "browser": true,
         "es6": true,
-        "esversion": 6
+        "amd": true,
     },
     "extends": "eslint:recommended",
     "parserOptions": {
         "sourceType": "module"
     },
     "rules": {
+        "no-console": ["off"],
         "indent": [
             "error",
             4

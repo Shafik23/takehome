@@ -37,15 +37,15 @@ function requestSocialMedia(media) {
 // social-media APIs, then waits for all of them to finish before returning the results.
 // If an endpoint returns an error instead of valid results, the error is injected into the results,
 // prefixed with "API Error".
-app.get('/', function (req, res) {
+app.get('/', async function (req, res) {
     log('-------------------------------------------------------');
-    Promise.all([
+    await Promise.all([
         requestSocialMedia('twitter'),
         requestSocialMedia('facebook'),
         requestSocialMedia('instagram')
-    ]).then(function() {
-        res.json(globalResponse);
-    });
+    ]);
+
+    res.json(globalResponse);
 });
 
 

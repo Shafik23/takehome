@@ -20,17 +20,16 @@ let globalResponse = {twitter: [], facebook: [], instagram: []};
 
 // Helper function: performs a request to the given social media API,
 // and returns a Promise encapsulating the response.
-function requestSocialMedia(media) {
-    return requestPromise(`https://takehome.io/${media}`, {json: true})
-        .then(function(body) {
-            log(`${media}:`);
-            log(body);
-            globalResponse[media] = body;
-        })
-        .catch(function(err) {
-            log(`Error from ${media}: `, err.message); 
-            globalResponse[media] = ['API Error: ' + err];
-        });
+async function requestSocialMedia(media) {
+    try {
+        const ret =  await requestPromise(`https://takehome.io/${media}`, {json: true});
+        log(`${media}:`);
+        log(ret);
+        globalResponse[media] = ret;
+    } catch (err) {
+        log(`Error from ${media}: `, err.message);
+        globalResponse[media] = ['API Error: ' + err];
+    }
 }
 
 // Default home route: performs 3 requests asynchronously to the different
